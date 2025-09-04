@@ -15,3 +15,15 @@ Election data is sourced from the official Valgdirektoratet API at [valgresultat
 All credits for the data go to Valgdirektoratet.
 
 
+## Usage
+### Load data for analysis
+- First run the API script to download the raw data:
+  ```bash
+  python src/api/get_election_results.py
+  python src/api/get_counties.py
+  python src/api/get_municipalities.py
+  ```
+- Then run the scripts in models
+- Finally run the analysis scripts in analysis
+
+
