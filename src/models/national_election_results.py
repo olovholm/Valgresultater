@@ -9,21 +9,23 @@ facts = []
 for file in files:
     with open(file) as f:
         data = json.load(f)
-    election_id = data['id']['valgaar']  # or a composite key
-    for region in data['_links']['related']:
-        region_id = region['nr']
-        for party in data['partier']:
-            party_code = party['id']['partikode']
-            percent = party.get('stemmer', {}).get('resultat', {}).get('prosent', 0)
-            votes = party.get('stemmer', {}).get('resultat',{}).get('antall', {}).get('total', 0)  # adjust to your metric
+        year = data['id']['valgaar']
+        for parti in data.get('partier', []):
+            party_code = parti['id'].get('partikode')
+            party_name = parti['id'].get('navn')
+            votes = parti.get('stemmer', {}).get('resultat', {}).get('prosent', 0)
+            mandater = parti.get('mandater', {}).get('resultat', {}).get('antall', 0)
             facts.append({
-                'valg_id': election_id,
-                'region': region_id,
-                'parti_kode': party_code,
-                'prosent': percent,
-                'stemmer': votes
+                'year': year,
+                'party_code': party_code,
+                'party_name': party_name,
+                'votes_percentage': votes,
+                'mandates': mandater
             })
+
+
+
 
 fact_df = pd.DataFrame(facts)
 os.makedirs('../../data/facts', exist_ok=True)
-fact_df.to_csv('../../data/facts/election_results_per_county.csv', index=False)
+fact_df.to_csv('../../data/facts/election_results_total.csv', index=False)
