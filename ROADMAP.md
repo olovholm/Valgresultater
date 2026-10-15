@@ -16,7 +16,7 @@ Fasene bygger på hverandre: innsikt er lite verdt før dataene er riktige.
 - [ ] **Topp 10 per parti per år.** `src/anlysis/top_10_municipalities_per_party.py` grupperer kun på `party_code`, så årene blandes.
 - [ ] **Partidimensjon per år.** Samme partikode har ulike navn over tid (SV, DEMN, KRISTNE, HELSE), og MDG bytter partikategori (2 → 1). Lag `partikode + år → navn, kategori` pluss et kanonisk navn.
 - [x] **Notebook:** bruker kolonnen `'vo'`, som ikke finnes; aksetittelen sier «Mandates», men grafen viser stemmer.
-- [ ] **Avhengigheter** i `requirements.txt` eller `pyproject.toml` (pandas, requests, matplotlib).
+- [x] **Avhengigheter** i `requirements.txt` eller `pyproject.toml` (pandas, requests, matplotlib).
 - [ ] Rydde navn: `anlysis` → `analysis`, `dimentions` → `dimensions`.
 
 ## Fase 2 – Datagrunnlag
@@ -47,7 +47,8 @@ Fasene bygger på hverandre: innsikt er lite verdt før dataene er riktige.
 
 ## Leveranse
 
-- [ ] Første versjon: DuckDB + Streamlit.
+- [x] Første versjon: Streamlit-app med landsresultater (`src/app/streamlit_app.py`) – nøkkeltall, resultat og endring per valg, mandater, utvikling over tid og valgdeltakelse.
+- [ ] Bytte appens datakilde til DuckDB når den lange faktatabellen fra fase 2 er på plass, og utvide med fylke, kommune og stemmekrets.
 - [ ] Offentlig versjon: statisk side (Observable Framework eller Evidence) på samme DuckDB-fil.
 - [ ] Kartgrunnlag: kommune-, fylkes- og kretsgrenser som GeoJSON fra Geonorge.
 - [ ] Automatisk oppdatering (f.eks. GitHub Actions) rundt valg.
