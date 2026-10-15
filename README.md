@@ -27,3 +27,6 @@ All credits for the data go to Valgdirektoratet.
 - Finally run the analysis scripts in analysis
 
 
+
+## Roadmap
+Planned fixes and ideas for insights are tracked in [ROADMAP.md](ROADMAP.md) (in Norwegian).
