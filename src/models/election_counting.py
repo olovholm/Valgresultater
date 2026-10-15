@@ -13,6 +13,8 @@ for file in files:
         stemmer = data.get('stemmer', {})
         # 'opptalt' is missing from the 2025 schema, which uses 'opptellingsStatus' instead
         opptalt = data.get('opptalt') or {}
+        # Blank votes are listed as a party ('BLANKE') from 2013 onwards
+        blanke = next((p for p in data.get('partier', []) if p['id'].get('partikode') == 'BLANKE'), None)
 
         facts.append({
             'year': year,
@@ -21,10 +23,11 @@ for file in files:
             'total_votes': stemmer.get('total'),
             'advance_votes': stemmer.get('fhs'),
             'rejected_votes': stemmer.get('totalForkastede'),
+            'blank_votes': blanke['stemmer']['resultat']['antall']['total'] if blanke else None,
             'turnout_percentage': data.get('frammote', {}).get('prosent'),
             'counted_percentage': opptalt.get('endelig')
         })
 
-fact_df = pd.DataFrame(facts)
+fact_df = pd.DataFrame(facts).astype({'blank_votes': 'Int64'})
 os.makedirs('../../data/facts', exist_ok=True)
 fact_df.to_csv('../../data/facts/election_counting.csv', index=False)
