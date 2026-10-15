@@ -6,7 +6,7 @@ Fasene bygger på hverandre: innsikt er lite verdt før dataene er riktige.
 
 ## Fase 1 – Rette datafeil
 
-- [ ] **Last ned 2025-data på nytt.** `data/raw/election_results_2025.json` er et valgnattsnapshot (`rapportGenerert` 2025-09-08T21:00:45, 2 093 254 av 3 246 318 stemmer talt). Kommunefilene for 2025 er generert 2025-09-01 – før valget – og inneholder bare nuller. API-et har nå endelige tall (FrP 47 / MDG 8 / V 3, mot 49 / 7 / 2 lokalt).
+- [x] **Last ned 2025-data på nytt.** `data/raw/election_results_2025.json` er et valgnattsnapshot (`rapportGenerert` 2025-09-08T21:00:45, 2 093 254 av 3 246 318 stemmer talt). Kommunefilene for 2025 er generert 2025-09-01 – før valget – og inneholder bare nuller. API-et har nå endelige tall (FrP 47 / MDG 8 / V 3, mot 49 / 7 / 2 lokalt).
   - [ ] Lagre `tidspunkt.rapportGenerert` og sjekk at opptellingen er ferdig før data tas i bruk (`opptalt.endelig == 100` for eldre år, `opptellingsStatus` fra 2025).
 - [ ] **Filtrer bort «Andre»/«Andre2» (`partikategori == 0`).** Samlepost for småpartier som gir dobbelttelling – mandatsummen blir 170 i 2013 og 2021.
 - [x] **Fiks feltnavn i `src/models/election_counting.py`.** `stemmegivning`, `fremmotte` og `opptalt.prosent` finnes ikke, så `election_counting.csv` er bare nuller. Riktige felt: `stemmer.total`, `stemmegiving`, `frammote.prosent`, `antallsb`. Merk at 2025 har et annet skjema (`opptellingsStatus` i stedet for `opptalt`/`prognose`).
